@@ -21,7 +21,6 @@ site living in the root folder, and demonstrations held inside the demo folder.
 
 ```text
 cooking-merrilly
-cooking-merrilly
 ├── public/
 ├── src/
 │   ├── controllers/
@@ -39,14 +38,13 @@ cooking-merrilly
 
 ### Project Setup
 
-- [ ] Initialize Node + TypeScript project
-- [ ] Create project structure
-- [ ] Configure tsconfig.json
-- [ ] Setup environment variables
+- [x] Initialize Node
+- [x] Create project structure
+- [x] Setup environment variables
 
 ### Database
 
-- [ ] Create new MongoDB database
+- [x] Create new MongoDB database
 - [ ] Implement Mongoose models (Recipe, User)
 
 ### REST API (Week 1 Requirement)
@@ -57,14 +55,14 @@ cooking-merrilly
 
 ### API Documentation
 
-- [ ] Setup Swagger
+- [x] Setup Swagger
 - [ ] Document GET, GET by ID, POST, PUT, DELETE
 
 ### Deployment
 
-- [ ] Create new Render service
-- [ ] Add environment variables
-- [ ] Deploy and test live API
+- [x] Create new Render service
+- [x] Add environment variables
+- [x] Deploy and test live API
 
 ### OAuth
 
@@ -77,6 +75,11 @@ cooking-merrilly
 - [ ] Implement queries
 - [ ] Implement mutations
 - [ ] Add GraphQL endpoint
+
+### Typescript (Extra Credit)
+
+- [ ] Configure typescript
+- [ ] Translate all .js into .ts
 
 ### Validation & Error Handling
 
