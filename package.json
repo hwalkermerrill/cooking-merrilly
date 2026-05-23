@@ -1,0 +1,48 @@
+{
+  "name": "cooking-merrilly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+		"build": "lightningcss --bundle --minify --targets \">= 0.25%\" css/main.css -o dist/styles.css",
+		"watch": "chokidar \"css/**/*.css\" -c \"pnpm build\" --debounce 600",
+		"refreshCSS": "npx lightningcss-cli --bundle --minify --targets \">= 0.25%\" css/main.css -o dist/styles.css",
+    "dev": "nodemon --env-file=.env server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.3",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
+    "@types/node": "^25.9.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.6.0",
+    "lightningcss-cli": "^1.32.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "graphql": "^16.14.0",
+    "graphql-http": "^1.22.4",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.4.3"
+  }
+}
