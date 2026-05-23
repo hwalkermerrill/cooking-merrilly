@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// Dev Logging (similar to your backend class)
+// Dev Logging
 const devLogs = (req, res, next) => {
 	const isDev = NODE_ENV === "development";
 
@@ -50,6 +50,6 @@ app.use("/", require("./src/controllers/routes"));
 // Start Server After DB Connects
 mongoose.connection.once("open", () => {
 	app.listen(PORT, () => {
-		console.log(`Server running at http://127.0.0.1:${PORT}`);
+		console.log(`Server is running on http://127.0.0.1:${PORT}`);
 	});
 });

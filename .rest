@@ -1,0 +1,39 @@
+### Health Check - Local
+GET http://localhost:3000/
+
+### Health Check - Render
+GET https://cooking-merrilly.onrender.com
+
+### Get all recipes
+GET http://localhost:3000/recipes
+
+### Get recipe by ID
+GET http://localhost:3000/recipes/{}
+
+### Create a recipe
+POST http://localhost:3000/recipes
+Content-Type: application/json
+
+{
+  "title": "Test Recipe",
+  "ingredients": [
+    { "text": "1 cup flour" },
+    { "text": "2 eggs", "optional": true }
+  ],
+  "steps": [
+    "Mix ingredients",
+    "Bake at 350F for 20 minutes"
+  ],
+  "tags": ["test", "baking"]
+}
+
+### Update a recipe
+PUT http://localhost:3000/recipes/{}
+Content-Type: application/json
+
+{
+  "title": "Updated Recipe Title"
+}
+
+### Delete a recipe
+DELETE http://localhost:3000/recipes/{}
