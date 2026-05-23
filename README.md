@@ -14,6 +14,27 @@ This site is intended to expand to include organized family recipes, loved exter
 A cookbook API designed for CSE341 web services, mongoDB, and Render.
 This site is intended to expand to include organized family recipes, loved external inclusions, and original creations.
 
+## Structure
+
+Each topic is sorted by unit, with files required for the main functioning of the
+site living in the root folder, and demonstrations held inside the demo folder.
+
+```text
+cooking-merrilly
+cooking-merrilly
+├── public/
+├── src/
+│   ├── controllers/
+│   │   └── routes.js
+│   ├── middleware/
+│   ├── models/
+│   │   └── connection.js
+│   ├── utils/
+│   └── views/
+├── swagger-output.json
+└── server.js
+```
+
 ## Features to be Implemented (Checklist)
 
 ### Project Setup
