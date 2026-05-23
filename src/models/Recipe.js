@@ -73,6 +73,11 @@ const recipeSchema = new mongoose.Schema({
 		default: ""
 	},
 
+	pairings: {
+		type: String,
+		default: ""
+	},
+
 	// Optional variations
 	variations: {
 		type: [variationSchema],
