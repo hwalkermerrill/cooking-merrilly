@@ -49,14 +49,16 @@ cooking-merrilly
 
 ### REST API (Week 1 Requirement)
 
-- [ ] Create GET /recipes
-- [ ] Create POST /recipes
+- [x] Create GET /recipes
+- [x] Create POST /recipes
+- [x] Create PUT /recipes
+- [x] Create DELETE /recipes
 - [ ] Add validation + error handling
 
 ### API Documentation
 
 - [x] Setup Swagger
-- [ ] Document GET, GET by ID, POST, PUT, DELETE
+- [x] Document GET, GET by ID, POST, PUT, DELETE
 
 ### Deployment
 
