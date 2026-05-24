@@ -48,22 +48,104 @@ router.post("/recipes", (req, res) => {
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Create a new recipe'
 		#swagger.description = 'Creates a new recipe using the provided JSON body.'
+
 		#swagger.responses = {
-			201: { description: 'Recipe created successfully' },
-			400: { description: 'Bad Request' }
+			"201": {
+				"description": "Recipe created successfully"
+			},
+			"400": {
+				"description": "Bad Request"
+			}
 		}
+
 		#swagger.requestBody = {
-			required: true,
-			content: {
+			"required": true,
+			"content": {
 				"application/json": {
-					schema: {
-						title: "Example Recipe",
-						ingredients: [
-							{ text: "1 cup flour" },
-							{ text: "2 eggs", optional: true }
-						],
-						steps: ["Mix ingredients", "Bake at 350F for 20 minutes"],
-						tags: ["baking", "dessert"]
+					"schema": {
+						"type": "object",
+						"properties": {
+							"title": { "type": "string", "example": "Example Recipe" },
+							"description": { "type": "string" },
+							"ingredients": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"text": { "type": "string" },
+										"optional": { "type": "boolean" },
+										"secret": { "type": "boolean" }
+									}
+								},
+								"example": [
+									{ "text": "1 cup flour" },
+									{ "text": "2 eggs", "optional": true }
+								]
+							},
+							"steps": {
+								"type": "array",
+								"items": { "type": "string" },
+								"example": ["Mix ingredients", "Bake at 350F for 20 minutes"]
+							},
+							"tags": {
+								"type": "array",
+								"items": { "type": "string" },
+								"example": ["baking", "dessert"]
+							},
+							"sections": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"title": { "type": "string" },
+										"ingredients": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"text": { "type": "string" },
+													"optional": { "type": "boolean" },
+													"secret": { "type": "boolean" }
+												}
+											}
+										},
+										"steps": {
+											"type": "array",
+											"items": { "type": "string" }
+										}
+									}
+								}
+							},
+							"pairings": { "type": "string" },
+							"prepTimeMinutes": { "type": "number" },
+							"cookTimeMinutes": { "type": "number" },
+							"yield": { "type": "string" },
+							"variations": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"author": { "type": "string" },
+										"notes": { "type": "string" },
+										"ingredients": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"text": { "type": "string" },
+													"optional": { "type": "boolean" },
+													"secret": { "type": "boolean" }
+												}
+											}
+										},
+										"steps": {
+											"type": "array",
+											"items": { "type": "string" }
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -72,28 +154,105 @@ router.post("/recipes", (req, res) => {
 	return recipes.createRecipe(req, res);
 });
 
-
 // PUT update recipe
 router.put("/recipes/:id", (req, res) => {
 	/* 
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Update a recipe'
 		#swagger.description = 'Updates a recipe by its ID.'
+
 		#swagger.parameters = [
 			{
-				name: 'id',
-				in: 'path',
-				required: true,
-				type: 'string',
-				description: 'Recipe ID'
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "string",
+				"description": "Recipe ID"
 			}
 		]
+
 		#swagger.requestBody = {
-			required: true,
-			content: {
+			"required": true,
+			"content": {
 				"application/json": {
-					schema: {
-						title: "Updated Recipe Title"
+					"schema": {
+						"type": "object",
+						"properties": {
+							"title": { "type": "string", "example": "Updated Recipe Title" },
+							"description": { "type": "string" },
+							"ingredients": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"text": { "type": "string" },
+										"optional": { "type": "boolean" },
+										"secret": { "type": "boolean" }
+									}
+								}
+							},
+							"steps": {
+								"type": "array",
+								"items": { "type": "string" }
+							},
+							"sections": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"title": { "type": "string" },
+										"ingredients": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"text": { "type": "string" },
+													"optional": { "type": "boolean" },
+													"secret": { "type": "boolean" }
+												}
+											}
+										},
+										"steps": {
+											"type": "array",
+											"items": { "type": "string" }
+										}
+									}
+								}
+							},
+							"tags": {
+								"type": "array",
+								"items": { "type": "string" }
+							},
+							"pairings": { "type": "string" },
+							"prepTimeMinutes": { "type": "number" },
+							"cookTimeMinutes": { "type": "number" },
+							"yield": { "type": "string" },
+							"variations": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"author": { "type": "string" },
+										"notes": { "type": "string" },
+										"ingredients": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"text": { "type": "string" },
+													"optional": { "type": "boolean" },
+													"secret": { "type": "boolean" }
+												}
+											}
+										},
+										"steps": {
+											"type": "array",
+											"items": { "type": "string" }
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
