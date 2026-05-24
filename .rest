@@ -8,7 +8,7 @@ GET https://cooking-merrilly.onrender.com
 GET http://localhost:3000/recipes
 
 ### Get recipe by ID
-GET http://localhost:3000/recipes/{}
+GET http://localhost:3000/recipes/6a12725ce48f57ecc71efbea
 
 ### Create a recipe
 POST http://localhost:3000/recipes
@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Update a recipe
-PUT http://localhost:3000/recipes/{}
+PUT http://localhost:3000/recipes/6a12725ce48f57ecc71efbea
 Content-Type: application/json
 
 {
@@ -36,4 +36,4 @@ Content-Type: application/json
 }
 
 ### Delete a recipe
-DELETE http://localhost:3000/recipes/{}
+DELETE http://localhost:3000/recipes/6a12725ce48f57ecc71efbea
