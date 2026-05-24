@@ -27,7 +27,11 @@
     },
     "/recipes": {
       "get": {
-        "description": "",
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get all recipes",
+        "description": "Returns a list of all recipes in the database.",
         "responses": {
           "200": {
             "description": "OK"
@@ -38,26 +42,65 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Create a new recipe",
+        "description": "Creates a new recipe using the provided JSON body.",
         "responses": {
           "201": {
             "description": "Created"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "   { text: 1 cup flour },   { text: 2 eggs, optional: true }   ": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Example Recipe",
+                "ingredients": [
+                  {
+                    "text": "1 cup flour"
+                  },
+                  {
+                    "text": "2 eggs",
+                    "optional": true
+                  }
+                ],
+                "steps": [
+                  "Mix ingredients",
+                  "Bake at 350F for 20 minutes"
+                ],
+                "tags": [
+                  "baking",
+                  "dessert"
+                ]
+              }
+            }
           }
         }
       }
     },
     "/recipes/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get a recipe by ID",
+        "description": "Returns a single recipe based on its MongoDB ObjectId.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
@@ -73,13 +116,18 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Update a recipe",
+        "description": "Updates a recipe by its ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
@@ -92,16 +140,31 @@
           "404": {
             "description": "Not Found"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Updated Recipe Title"
+              }
+            }
+          }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Delete a recipe",
+        "description": "Deletes a recipe by its ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
