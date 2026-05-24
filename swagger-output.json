@@ -47,25 +47,8 @@
         ],
         "summary": "Create a new recipe",
         "description": "Creates a new recipe.",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/recipes/{id}": {
-      "get": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "Get a recipe by ID",
-        "description": "Returns a single recipe based on its MongoDB ObjectId.",
         "parameters": [
-          {
+					{
 						"name": "recipe",
 						"in": "body",
 						"required": true,
@@ -103,6 +86,35 @@
 					"201": { "description": "Created" },
 					"400": { "description": "Bad Request" }
 				}
+			}
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get a recipe by ID",
+        "description": "Returns a single recipe based on its MongoDB ObjectId.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Recipe ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       },
       "put": {
         "tags": [
