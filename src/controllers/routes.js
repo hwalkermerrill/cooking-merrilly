@@ -50,98 +50,95 @@ router.post("/recipes", (req, res) => {
 		#swagger.description = 'Creates a new recipe using the provided JSON body.'
 
 		#swagger.responses = {
-			"201": {
-				"description": "Recipe created successfully"
-			},
-			"400": {
-				"description": "Bad Request"
-			}
+			"201": { "description": "Created" },
+			"400": { "description": "Bad Request" }
 		}
 
-		#swagger.requestBody = {
-			"required": true,
-			"content": {
-				"application/json": {
-					"schema": {
-						"type": "object",
-						"properties": {
-							"title": { "type": "string", "example": "Example Recipe" },
-							"description": { "type": "string" },
-							"ingredients": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"text": { "type": "string" },
-										"optional": { "type": "boolean" },
-										"secret": { "type": "boolean" }
-									}
-								},
-								"example": [
-									{ "text": "1 cup flour" },
-									{ "text": "2 eggs", "optional": true }
-								]
-							},
-							"steps": {
-								"type": "array",
-								"items": { "type": "string" },
-								"example": ["Mix ingredients", "Bake at 350F for 20 minutes"]
-							},
-							"tags": {
-								"type": "array",
-								"items": { "type": "string" },
-								"example": ["baking", "dessert"]
-							},
-							"sections": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"title": { "type": "string" },
-										"ingredients": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"text": { "type": "string" },
-													"optional": { "type": "boolean" },
-													"secret": { "type": "boolean" }
-												}
-											}
-										},
-										"steps": {
-											"type": "array",
-											"items": { "type": "string" }
-										}
-									}
+		#swagger.parameters = [
+			{
+				"name": "recipe",
+				"in": "body",
+				"required": true,
+				"description": "Recipe data",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"title": { "type": "string", "example": "Example Recipe" },
+						"description": { "type": "string" },
+						"ingredients": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"text": { "type": "string" },
+									"optional": { "type": "boolean" },
+									"secret": { "type": "boolean" }
 								}
 							},
-							"pairings": { "type": "string" },
-							"prepTimeMinutes": { "type": "number" },
-							"cookTimeMinutes": { "type": "number" },
-							"yield": { "type": "string" },
-							"variations": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"author": { "type": "string" },
-										"notes": { "type": "string" },
-										"ingredients": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"text": { "type": "string" },
-													"optional": { "type": "boolean" },
-													"secret": { "type": "boolean" }
-												}
+							"example": [
+								{ "text": "1 cup flour" },
+								{ "text": "2 eggs", "optional": true }
+							]
+						},
+						"steps": {
+							"type": "array",
+							"items": { "type": "string" },
+							"example": ["Mix ingredients", "Bake at 350F for 20 minutes"]
+						},
+						"tags": {
+							"type": "array",
+							"items": { "type": "string" },
+							"example": ["baking", "dessert"]
+						},
+						"sections": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"title": { "type": "string" },
+									"ingredients": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"text": { "type": "string" },
+												"optional": { "type": "boolean" },
+												"secret": { "type": "boolean" }
 											}
-										},
-										"steps": {
-											"type": "array",
-											"items": { "type": "string" }
 										}
+									},
+									"steps": {
+										"type": "array",
+										"items": { "type": "string" }
+									}
+								}
+							}
+						},
+						"pairings": { "type": "string" },
+						"prepTimeMinutes": { "type": "number" },
+						"cookTimeMinutes": { "type": "number" },
+						"yield": { "type": "string" },
+						"variations": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"author": { "type": "string" },
+									"notes": { "type": "string" },
+									"ingredients": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"text": { "type": "string" },
+												"optional": { "type": "boolean" },
+												"secret": { "type": "boolean" }
+											}
+										}
+									},
+									"steps": {
+										"type": "array",
+										"items": { "type": "string" }
 									}
 								}
 							}
@@ -149,7 +146,7 @@ router.post("/recipes", (req, res) => {
 					}
 				}
 			}
-		}
+		]
 	*/
 	return recipes.createRecipe(req, res);
 });
@@ -168,87 +165,85 @@ router.put("/recipes/:id", (req, res) => {
 				"required": true,
 				"type": "string",
 				"description": "Recipe ID"
-			}
-		]
-
-		#swagger.requestBody = {
-			"required": true,
-			"content": {
-				"application/json": {
-					"schema": {
-						"type": "object",
-						"properties": {
-							"title": { "type": "string", "example": "Updated Recipe Title" },
-							"description": { "type": "string" },
-							"ingredients": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"text": { "type": "string" },
-										"optional": { "type": "boolean" },
-										"secret": { "type": "boolean" }
+			},
+			{
+				"name": "recipe",
+				"in": "body",
+				"required": true,
+				"description": "Updated recipe data",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"title": { "type": "string", "example": "Updated Recipe Title" },
+						"description": { "type": "string" },
+						"ingredients": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"text": { "type": "string" },
+									"optional": { "type": "boolean" },
+									"secret": { "type": "boolean" }
+								}
+							}
+						},
+						"steps": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"sections": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"title": { "type": "string" },
+									"ingredients": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"text": { "type": "string" },
+												"optional": { "type": "boolean" },
+												"secret": { "type": "boolean" }
+											}
+										}
+									},
+									"steps": {
+										"type": "array",
+										"items": { "type": "string" }
 									}
 								}
-							},
-							"steps": {
-								"type": "array",
-								"items": { "type": "string" }
-							},
-							"sections": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"title": { "type": "string" },
-										"ingredients": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"text": { "type": "string" },
-													"optional": { "type": "boolean" },
-													"secret": { "type": "boolean" }
-												}
+							}
+						},
+						"tags": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"pairings": { "type": "string" },
+						"prepTimeMinutes": { "type": "number" },
+						"cookTimeMinutes": { "type": "number" },
+						"yield": { "type": "string" },
+						"variations": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"author": { "type": "string" },
+									"notes": { "type": "string" },
+									"ingredients": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"text": { "type": "string" },
+												"optional": { "type": "boolean" },
+												"secret": { "type": "boolean" }
 											}
-										},
-										"steps": {
-											"type": "array",
-											"items": { "type": "string" }
 										}
-									}
-								}
-							},
-							"tags": {
-								"type": "array",
-								"items": { "type": "string" }
-							},
-							"pairings": { "type": "string" },
-							"prepTimeMinutes": { "type": "number" },
-							"cookTimeMinutes": { "type": "number" },
-							"yield": { "type": "string" },
-							"variations": {
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"author": { "type": "string" },
-										"notes": { "type": "string" },
-										"ingredients": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"text": { "type": "string" },
-													"optional": { "type": "boolean" },
-													"secret": { "type": "boolean" }
-												}
-											}
-										},
-										"steps": {
-											"type": "array",
-											"items": { "type": "string" }
-										}
+									},
+									"steps": {
+										"type": "array",
+										"items": { "type": "string" }
 									}
 								}
 							}
@@ -256,7 +251,7 @@ router.put("/recipes/:id", (req, res) => {
 					}
 				}
 			}
-		}
+		]
 	*/
 	return recipes.updateRecipe(req, res);
 });

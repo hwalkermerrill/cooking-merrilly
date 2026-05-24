@@ -47,155 +47,407 @@
         ],
         "summary": "Create a new recipe",
         "description": "Creates a new recipe using the provided JSON body.",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "   { text: 1 cup flour },   { text: 2 eggs, optional: true }   ": {
-            "description": ""
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "Recipe data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
                 "properties": {
-                  "title": {
-                    "type": "string",
-                    "example": "Example Recipe"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "ingredients": {
-                    "type": "array",
-                    "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
                       "type": "object",
                       "properties": {
-                        "text": {
-                          "type": "string"
+                        "type": {
+                          "type": "string",
+                          "example": "string"
                         },
-                        "optional": {
-                          "type": "boolean"
-                        },
-                        "secret": {
-                          "type": "boolean"
+                        "example": {
+                          "type": "string",
+                          "example": "Example Recipe"
                         }
                       }
                     },
-                    "example": [
-                      {
-                        "text": "1 cup flour"
-                      },
-                      {
-                        "text": "2 eggs",
-                        "optional": true
-                      }
-                    ]
-                  },
-                  "steps": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "Mix ingredients",
-                      "Bake at 350F for 20 minutes"
-                    ]
-                  },
-                  "tags": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "baking",
-                      "dessert"
-                    ]
-                  },
-                  "sections": {
-                    "type": "array",
-                    "items": {
+                    "description": {
                       "type": "object",
                       "properties": {
-                        "title": {
-                          "type": "string"
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "ingredients": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "array"
                         },
-                        "ingredients": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "object"
+                            },
+                            "properties": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "string"
+                                    }
+                                  }
+                                },
+                                "optional": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "boolean"
+                                    }
+                                  }
+                                },
+                                "secret": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "example": {
                           "type": "array",
                           "items": {
                             "type": "object",
                             "properties": {
                               "text": {
-                                "type": "string"
+                                "type": "string",
+                                "example": "2 eggs"
                               },
                               "optional": {
-                                "type": "boolean"
-                              },
-                              "secret": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "example": true
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "steps": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "array"
                         },
-                        "steps": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        },
+                        "example": {
                           "type": "array",
+                          "example": [
+                            "Mix ingredients",
+                            "Bake at 350F for 20 minutes"
+                          ],
                           "items": {
                             "type": "string"
                           }
                         }
                       }
-                    }
-                  },
-                  "pairings": {
-                    "type": "string"
-                  },
-                  "prepTimeMinutes": {
-                    "type": "number"
-                  },
-                  "cookTimeMinutes": {
-                    "type": "number"
-                  },
-                  "yield": {
-                    "type": "string"
-                  },
-                  "variations": {
-                    "type": "array",
-                    "items": {
+                    },
+                    "tags": {
                       "type": "object",
                       "properties": {
-                        "author": {
-                          "type": "string"
+                        "type": {
+                          "type": "string",
+                          "example": "array"
                         },
-                        "notes": {
-                          "type": "string"
-                        },
-                        "ingredients": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              },
-                              "optional": {
-                                "type": "boolean"
-                              },
-                              "secret": {
-                                "type": "boolean"
-                              }
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
                             }
                           }
                         },
-                        "steps": {
+                        "example": {
                           "type": "array",
+                          "example": [
+                            "baking",
+                            "dessert"
+                          ],
                           "items": {
                             "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "sections": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "array"
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "object"
+                            },
+                            "properties": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "string"
+                                    }
+                                  }
+                                },
+                                "ingredients": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "array"
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "example": "object"
+                                        },
+                                        "properties": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "string"
+                                                }
+                                              }
+                                            },
+                                            "optional": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "boolean"
+                                                }
+                                              }
+                                            },
+                                            "secret": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "boolean"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "steps": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "array"
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "example": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "pairings": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "prepTimeMinutes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "number"
+                        }
+                      }
+                    },
+                    "cookTimeMinutes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "number"
+                        }
+                      }
+                    },
+                    "yield": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "variations": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "array"
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "object"
+                            },
+                            "properties": {
+                              "type": "object",
+                              "properties": {
+                                "author": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "string"
+                                    }
+                                  }
+                                },
+                                "notes": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "string"
+                                    }
+                                  }
+                                },
+                                "ingredients": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "array"
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "example": "object"
+                                        },
+                                        "properties": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "string"
+                                                }
+                                              }
+                                            },
+                                            "optional": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "boolean"
+                                                }
+                                              }
+                                            },
+                                            "secret": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "example": "boolean"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "steps": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "example": "array"
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "example": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -204,6 +456,17 @@
                 }
               }
             }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "   {   name: recipe,   in: body,   required: true,   description: Recipe data,   schema: {   type: object,   properties: {   title: { type: string, example: Example Recipe },   description: { type: string },   ingredients: {   type: array,   items: {   type: object,   properties: {   text: { type: string },   optional: { type: boolean },   secret: { type: boolean }   }   },   example: ": {
+            "description": ""
           }
         }
       }
@@ -260,137 +523,6 @@
           },
           "404": {
             "description": "Not Found"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "example": "Updated Recipe Title"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "ingredients": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "text": {
-                          "type": "string"
-                        },
-                        "optional": {
-                          "type": "boolean"
-                        },
-                        "secret": {
-                          "type": "boolean"
-                        }
-                      }
-                    }
-                  },
-                  "steps": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "sections": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "title": {
-                          "type": "string"
-                        },
-                        "ingredients": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              },
-                              "optional": {
-                                "type": "boolean"
-                              },
-                              "secret": {
-                                "type": "boolean"
-                              }
-                            }
-                          }
-                        },
-                        "steps": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "pairings": {
-                    "type": "string"
-                  },
-                  "prepTimeMinutes": {
-                    "type": "number"
-                  },
-                  "cookTimeMinutes": {
-                    "type": "number"
-                  },
-                  "yield": {
-                    "type": "string"
-                  },
-                  "variations": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "author": {
-                          "type": "string"
-                        },
-                        "notes": {
-                          "type": "string"
-                        },
-                        "ingredients": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              },
-                              "optional": {
-                                "type": "boolean"
-                              },
-                              "secret": {
-                                "type": "boolean"
-                              }
-                            }
-                          }
-                        },
-                        "steps": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       },
