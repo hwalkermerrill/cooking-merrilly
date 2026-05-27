@@ -45,7 +45,7 @@ app.use(devLogs);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Routes
-app.use("/", require("./src/controllers/routes"));
+app.use("/", require("./src/routes"));
 
 // Start Server After DB Connects
 mongoose.connection.once("open", () => {

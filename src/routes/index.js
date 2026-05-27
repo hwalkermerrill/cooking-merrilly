@@ -1,7 +1,7 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
-const recipes = require("./recipes");
+const recipes = require("../controllers/recipes");
 
 // Health check
 router.get("/", (req, res) => {
