@@ -90,7 +90,7 @@ router.post("/", (req, res) => {
 						'Mix all ingredients together.',
 						'Add computer chips and adjust power accordingly.'
 					],
-					tags: ['test', 'cpu' 'dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
+					tags: ['test', 'cpu', 'dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
 					prepTimeMinutes: 5,
 					cookTimeMinutes: 0,
 					yield: 'Serves 4–6',

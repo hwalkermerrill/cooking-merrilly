@@ -47,6 +47,93 @@
         ],
         "summary": "Create a new recipe",
         "description": "Creates a new recipe.",
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "Recipe data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Test Hummus and Computer Chips"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Quick homemade hummus with optional CPU upgrades."
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "example": "CPU"
+                      },
+                      "optional": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "example": [
+                    "Mix all ingredients together.",
+                    "Add computer chips and adjust power accordingly."
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "test",
+                    "cpu",
+                    "dip",
+                    "mediterranean",
+                    "sauce",
+                    "dairy-free",
+                    "vegan"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "prepTimeMinutes": {
+                  "type": "number",
+                  "example": 5
+                },
+                "cookTimeMinutes": {
+                  "type": "number",
+                  "example": 0
+                },
+                "yield": {
+                  "type": "string",
+                  "example": "Serves 4–6"
+                },
+                "pairings": {
+                  "type": "string",
+                  "example": "Serve with pita, veggies, or as a side to gyros."
+                },
+                "variations": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "isPublic": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
