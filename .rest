@@ -4,11 +4,22 @@ GET http://localhost:3000/
 ### Health Check - Render
 GET https://cooking-merrilly.onrender.com
 
+##### RECIPE ENDPOINTS #####
+
 ### Get all recipes
 GET http://localhost:3000/recipes
 
+### Get hidden recipes
+GET http://localhost:3000/recipes/hidden
+
 ### Get recipe by ID
 GET http://localhost:3000/recipes/6a12725ce48f57ecc71efbea
+
+### Get recipes by tag
+GET http://localhost:3000/recipes/tag/test
+
+### Get recipes by name
+GET http://localhost:3000/recipes/name/hummus
 
 ### Create a recipe
 POST http://localhost:3000/recipes
@@ -37,3 +48,40 @@ Content-Type: application/json
 
 ### Delete a recipe
 DELETE http://localhost:3000/recipes/6a12725ce48f57ecc71efbea
+
+##### MEAL ENDPOINTS #####
+
+### Get all meals
+GET http://localhost:3000/meals/
+
+### Get meal by ID
+GET http://localhost:3000/meals/6a12725ce48f57ecc71efbea
+
+### Get meals by tag
+GET http://localhost:3000/meals/tag/dinner
+
+### Get meals by name
+GET http://localhost:3000/meals/name/alfredo
+
+### Create a meal
+POST http://localhost:3000/meals/
+Content-Type: application/json
+
+{
+  "title": "Test Meal",
+  "description": "A sample meal",
+  "recipeIds": ["6a12725ce48f57ecc71efbea"],
+  "assemblySteps": ["Combine components", "Serve warm"],
+  "tags": ["test", "meal"]
+}
+
+### Update a meal
+PUT http://localhost:3000/meals/6a12725ce48f57ecc71efbea
+Content-Type: application/json
+
+{
+  "title": "Updated Meal Title"
+}
+
+### Delete a meal
+DELETE http://localhost:3000/meals/6a12725ce48f57ecc71efbea
