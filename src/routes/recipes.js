@@ -74,8 +74,8 @@ router.post("/", (req, res) => {
 				required: true,
 				description: 'Recipe data',
 				schema: {
-					title: 'Hummus',
-					description: 'Quick homemade hummus with optional sweet or spicy additions.',
+					title: 'Test Hummus and Computer Chips',
+					description: 'Quick homemade hummus with optional CPU upgrades.',
 					ingredients: [
 						{ text: '8 oz store-bought hummus' },
 						{ text: '1 tbsp olive oil' },
@@ -84,13 +84,13 @@ router.post("/", (req, res) => {
 						{ text: '1/2 tbsp crushed red pepper' },
 						{ text: '1/2 tbsp honey', secret: true },
 						{ text: '1-2 oz feta cheese', optional: true },
-						{ text: 'Dates', optional: true }
+						{ text: 'CPU', optional: true }
 					],
 					steps: [
 						'Mix all ingredients together.',
-						'Adjust measurements to taste.'
+						'Add computer chips and adjust power accordingly.'
 					],
-					tags: ['dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
+					tags: ['test', 'cpu' 'dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
 					prepTimeMinutes: 5,
 					cookTimeMinutes: 0,
 					yield: 'Serves 4–6',
@@ -120,7 +120,7 @@ router.put("/:id", (req, res) => {
 			required: true,
 			description: 'Updated recipe data (partial or full)',
 			schema: {
-				title: 'Updated Hummus Title',
+				title: 'Updated Test Hummus Title',
 				description: 'Optional updated description',
 				ingredients: [
 					{ text: '8 oz store-bought hummus' }
