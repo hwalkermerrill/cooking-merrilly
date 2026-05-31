@@ -82,6 +82,12 @@ const recipeSchema = new mongoose.Schema({
 	variations: {
 		type: [variationSchema],
 		default: []
+	},
+
+	// Flag to indicate private recipes that are ONLY displayed as part of a meal, not in the main recipe list
+	isPublic: {
+		type: Boolean,
+		default: true
 	}
 
 }, { timestamps: true });
