@@ -27,10 +27,10 @@ const devLogs = (req, res, next) => {
 	res.on("finish", () => {
 		if (!isDev) return;
 
-		if (Object.keys(req.query).length > 0) {
+		if (req.query && Object.keys(req.query).length > 0) {
 			console.log("Query:", req.query);
 		}
-		if (Object.keys(req.params).length > 0) {
+		if (req.params && Object.keys(req.params).length > 0) {
 			console.log("Params:", req.params);
 		}
 		console.log(`Response Status: ${res.statusCode}`);
