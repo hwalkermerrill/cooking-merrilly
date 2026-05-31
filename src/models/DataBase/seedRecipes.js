@@ -1,136 +1,121 @@
-const fettuccineAlfredo = {
-	title: "Fettuccine Alfredo",
-	description: "Rich homemade Alfredo with optional steak, shrimp, or chicken.",
-	tags: ["pasta", "alfredo", "italian", "comfort-food", "main", "sauce"],
-	pairings: "Serve with breadsticks and salad.",
+const fettuccinePasta = {
+	title: "Fettuccine Pasta",
+	description: "Basic fettuccine noodles cooked until mostly done.",
+	tags: ["pasta", "base"],
+	pairings: "Use as a base for Alfredo or other pasta dishes.",
 	ingredients: [
-		{ text: "2 packages Fettuccine noodles" },
-		{ text: "1 stick of butter" },
+		{ text: "2 packages fettuccine noodles" }
+	],
+	steps: [
+		"Cook fettuccine noodles in salted boiling water according to package directions until mostly done.",
+		"Drain and reserve for finishing in sauce."
+	],
+	prepTimeMinutes: 5,
+	cookTimeMinutes: 10,
+	yield: "Pasta for 4–6 servings",
+	isPublic: false
+};
+
+const stripSteak = {
+	title: "Sliced Strip Steak",
+	description: "Seasoned strip steak cooked to preferred doneness for serving with pasta or salad.",
+	tags: ["steak", "main", "protein", "pasta", "salad"],
+	pairings: "Serve over pasta, with Alfredo sauce, or alongside vegetables.",
+	ingredients: [
+		{ text: "1 ½ inch thick strip steak" },
+		{ text: "Salt" },
+		{ text: "Pepper" },
+		{ text: "Balsamic vinegar" },
+		{ text: "Garlic powder" },
+		{ text: "Onion powder" },
+		{ text: "Paprika" },
+		{ text: "Montreal steak seasoning", optional: true },
+		{ text: "Grapeseed oil" }
+	],
+	steps: [
+		"Score steak diagonally and season with salt, pepper, balsamic vinegar, garlic powder, onion powder, and paprika.",
+		"Heat a pan with a small amount of grapeseed oil.",
+		"Cook steak seasoning-side down, then season the other side with salt and pepper.",
+		"Cook to preferred doneness and set aside to rest before slicing."
+	],
+	prepTimeMinutes: 10,
+	cookTimeMinutes: 15,
+	yield: "Serves 2-4 depending on portion size",
+	isPublic: true
+};
+
+const alfredoSauce = {
+	title: "Alfredo Sauce",
+	description: "Rich, creamy Alfredo sauce for pasta or other dishes.",
+	tags: ["sauce", "alfredo", "italian"],
+	pairings: "Serve over fettuccine, bow-tie pasta, or as a base for other dishes.",
+	ingredients: [
+		{ text: "1 stick butter" },
+		{ text: "3 cloves garlic" },
+		{ text: "1 tsp pepper" },
+		{ text: "½ tsp salt" },
 		{ text: "2 tbsp flour" },
-		{ text: "3 cloves of garlic" },
-		{ text: "2 cups heavy whipping cream" },
 		{ text: "1 ½ cup Parmigiano Reggiano" },
 		{ text: "1 ½ cup Pecorino Romano" },
 		{ text: "¼ cup parsley" },
-		{ text: "Salt" },
-		{ text: "Pepper" },
 		{ text: "Italian seasoning" },
-		{ text: "Steak, shrimp, or chicken", optional: true }
+		{ text: "2 cups heavy cream" }
 	],
-	sections: [
-		{
-			title: "Steak Preparation",
-			ingredients: [
-				{ text: "1 ½ inch thick strip steak" },
-				{ text: "Salt" },
-				{ text: "Pepper" },
-				{ text: "Balsamic vinegar" },
-				{ text: "Garlic powder" },
-				{ text: "Onion powder" },
-				{ text: "Paprika" },
-				{ text: "Montreal steak seasoning", optional: true },
-				{ text: "Grapeseed oil" }
-			],
-			steps: [
-				"Score steak diagonally and season with salt, pepper, balsamic vinegar, garlic powder, onion powder, and paprika.",
-				"Heat pan with a small amount of grapeseed oil.",
-				"Cook steak seasoning-side down, then season the other side with salt and pepper.",
-				"Cook to preferred doneness and set aside to rest."
-			]
-		},
-		{
-			title: "Alfredo Sauce",
-			ingredients: [
-				{ text: "1 stick butter" },
-				{ text: "3 cloves garlic" },
-				{ text: "1 tsp pepper" },
-				{ text: "½ tsp salt" },
-				{ text: "2 tbsp flour" },
-				{ text: "1 ½ cup Parmigiano Reggiano" },
-				{ text: "1 ½ cup Pecorino Romano" },
-				{ text: "¼ cup parsley" },
-				{ text: "Italian seasoning" },
-				{ text: "2 cups heavy cream" }
-			],
-			steps: [
-				"On low heat, melt butter with garlic, pepper, and salt.",
-				"Slowly whisk in flour until smooth.",
-				"Add cheeses, parsley, and Italian seasoning.",
-				"Increase to medium heat and whisk in heavy cream until fully combined."
-			]
-		},
-		{
-			title: "Assembly",
-			ingredients: [
-				{ text: "2 packages mostly cooked fettuccine noodles" },
-				{ text: "Prepared steak, sliced" }
-			],
-			steps: [
-				"Move mostly cooked fettuccine into the sauce to finish cooking.",
-				"Stir vigorously to coat.",
-				"Slice steak and add to pasta."
-			]
-		}
+	steps: [
+		"On low heat, melt butter with garlic, pepper, and salt.",
+		"Slowly whisk in flour until smooth.",
+		"Add cheeses, parsley, and Italian seasoning.",
+		"Increase to medium heat and whisk in heavy cream until fully combined."
 	],
-	steps: [],
-	prepTimeMinutes: 20,
-	cookTimeMinutes: 25,
-	yield: "Serves 4-6"
+	prepTimeMinutes: 10,
+	cookTimeMinutes: 15,
+	yield: "Sauce for 4-6 servings of pasta",
+	isPublic: true
 };
 
-const gyros = {
-	title: "Gyros",
-	description: "Homemade gyros with chilled tzatziki sauce.",
-	tags: ["greek", "sauce", "main", "mediterranean", "tzatziki"],
-	pairings: "Serve with hummus and julienned veggies.",
+const gyroMeat = {
+	title: "Gyro Meat",
+	description: "Roasted or smoked lamb or chicken, sliced thinly for gyros.",
+	tags: ["gyro", "meat", "greek", "protein", "chicken", "lamb"],
+	pairings: "Serve in pita with tzatziki, vegetables, or over rice.",
 	ingredients: [
-		// Gyro ingredients (if any beyond tzatziki)
-		{ text: "Pita bread" },
-		{ text: "Cooked gyro meat or chicken" },
-		{ text: "Lettuce", optional: true },
-		{ text: "Tomato", optional: true },
-		{ text: "Onion", optional: true }
+		{ text: "Gyro meat or chicken" }
 	],
-	sections: [
-		{
-			title: "Tzatziki Sauce",
-			ingredients: [
-				{ text: "16 oz Greek yogurt" },
-				{ text: "1 medium cucumber (or 3 Japanese cucumbers)" },
-				{ text: "1 tbsp finely minced garlic" },
-				{ text: "1 tbsp olive oil" },
-				{ text: "Salt" },
-				{ text: "Onion powder" },
-				{ text: "Garlic powder" }
-			],
-			steps: [
-				"Peel and grate the cucumber, sprinkle with salt, and place on a plate.",
-				"Add a weight to press out liquid for 20-30 minutes.",
-				"Drain and squeeze cucumber in a kitchen towel.",
-				"Mix all ingredients together well.",
-				"Refrigerate for at least 3 hours before serving."
-			]
-		},
-		{
-			title: "Gyros Assembly",
-			ingredients: [
-				{ text: "Prepared tzatziki sauce" },
-				{ text: "Pita bread" },
-				{ text: "Gyro meat or chicken, roasted or smoked and then thinly sliced" },
-				{ text: "Julienned vegetables", optional: true }
-			],
-			steps: [
-				"Warm pita bread.",
-				"Add gyro meat or chicken.",
-				"Top with tzatziki sauce.",
-				"Add vegetables if desired."
-			]
-		}
+	steps: [
+		"Roast or smoke gyro meat or chicken until fully cooked.",
+		"Let rest briefly, then slice thinly for serving in gyros."
 	],
-	steps: [],
+	prepTimeMinutes: 10,
+	cookTimeMinutes: 60,
+	yield: "Enough meat for about 4 gyros",
+	isPublic: true
+};
+
+const tzatzikiSauce = {
+	title: "Tzatziki Sauce",
+	description: "Chilled Greek yogurt and cucumber sauce.",
+	tags: ["sauce", "greek", "mediterranean", "tzatziki"],
+	pairings: "Serve with gyros, pita, grilled meats, or veggies.",
+	ingredients: [
+		{ text: "16 oz Greek yogurt" },
+		{ text: "1 medium cucumber (or 3 Japanese cucumbers)" },
+		{ text: "1 tbsp finely minced garlic" },
+		{ text: "1 tbsp olive oil" },
+		{ text: "Salt" },
+		{ text: "Onion powder" },
+		{ text: "Garlic powder" }
+	],
+	steps: [
+		"Peel and grate the cucumber, sprinkle with salt, and place on a plate.",
+		"Add a weight to press out liquid for 20-30 minutes.",
+		"Drain and squeeze cucumber in a kitchen towel.",
+		"Mix yogurt, cucumber, garlic, olive oil, salt, onion powder, and garlic powder together well.",
+		"Refrigerate for at least 3 hours before serving."
+	],
 	prepTimeMinutes: 20,
-	cookTimeMinutes: 180,
-	yield: "Serves 4"
+	cookTimeMinutes: 0,
+	yield: "Serves 4",
+	isPublic: true
 };
 
 const hummus = {
@@ -152,14 +137,17 @@ const hummus = {
 		"Mix all ingredients together.",
 		"Adjust measurements to taste."
 	],
-	sections: [],
 	prepTimeMinutes: 5,
 	cookTimeMinutes: 0,
-	yield: "Serves 4–6"
+	yield: "Serves 4-6",
+	isPublic: true
 };
 
 module.exports = {
-	fettuccineAlfredo,
-	gyros,
+	fettuccinePasta,
+	stripSteak,
+	alfredoSauce,
+	gyroMeat,
+	tzatzikiSauce,
 	hummus
 };
