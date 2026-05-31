@@ -47,91 +47,6 @@
         ],
         "summary": "Create a new recipe",
         "description": "Creates a new recipe.",
-        "parameters": [
-          {
-            "name": "recipe",
-            "in": "body",
-            "required": true,
-            "description": "Recipe data",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Hummus"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Quick homemade hummus with optional sweet or spicy additions."
-                },
-                "ingredients": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "text": {
-                        "type": "string",
-                        "example": "Dates"
-                      },
-                      "optional": {
-                        "type": "boolean",
-                        "example": true
-                      }
-                    }
-                  }
-                },
-                "steps": {
-                  "type": "array",
-                  "example": [
-                    "Mix all ingredients together.",
-                    "Adjust measurements to taste."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tags": {
-                  "type": "array",
-                  "example": [
-                    "dip",
-                    "mediterranean",
-                    "sauce",
-                    "dairy-free",
-                    "vegan"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "prepTimeMinutes": {
-                  "type": "number",
-                  "example": 5
-                },
-                "cookTimeMinutes": {
-                  "type": "number",
-                  "example": 0
-                },
-                "yield": {
-                  "type": "string",
-                  "example": "Serves 4–6"
-                },
-                "pairings": {
-                  "type": "string",
-                  "example": "Serve with pita, veggies, or as a side to gyros."
-                },
-                "variations": {
-                  "type": "array",
-                  "example": [],
-                  "items": {}
-                },
-                "isPublic": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -217,7 +132,7 @@
               "properties": {
                 "title": {
                   "type": "string",
-                  "example": "Updated Hummus Title"
+                  "example": "Updated Test Hummus Title"
                 },
                 "description": {
                   "type": "string",
