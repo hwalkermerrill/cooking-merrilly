@@ -66,15 +66,40 @@ router.get("/name/:name", (req, res) => {
 // POST create recipe
 router.post("/", (req, res) => {
 	/* 
-		#swagger.tags = ['Recipes']
-		#swagger.summary = 'Create a new recipe'
-		#swagger.description = 'Creates a new recipe.'
-		#swagger.parameters['recipe'] = {
-			in: 'body',
-			required: true,
-			description: 'Recipe data'
-		}
-	*/
+			#swagger.tags = ['Recipes']
+			#swagger.summary = 'Create a new recipe'
+			#swagger.description = 'Creates a new recipe.'
+			#swagger.parameters['recipe'] = {
+				in: 'body',
+				required: true,
+				description: 'Recipe data',
+				schema: {
+					title: 'Hummus',
+					description: 'Quick homemade hummus with optional sweet or spicy additions.',
+					ingredients: [
+						{ text: '8 oz store-bought hummus' },
+						{ text: '1 tbsp olive oil' },
+						{ text: '1 tbsp garlic paste or powder' },
+						{ text: '1/2 tbsp lemon juice' },
+						{ text: '1/2 tbsp crushed red pepper' },
+						{ text: '1/2 tbsp honey', secret: true },
+						{ text: '1-2 oz feta cheese', optional: true },
+						{ text: 'Dates', optional: true }
+					],
+					steps: [
+						'Mix all ingredients together.',
+						'Adjust measurements to taste.'
+					],
+					tags: ['dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
+					prepTimeMinutes: 5,
+					cookTimeMinutes: 0,
+					yield: 'Serves 4–6',
+					pairings: 'Serve with pita, veggies, or as a side to gyros.',
+					variations: [],
+					isPublic: true
+				}
+			}
+		*/
 	return recipes.createRecipe(req, res);
 });
 
@@ -84,6 +109,29 @@ router.put("/:id", (req, res) => {
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Update a recipe'
 		#swagger.description = 'Updates an existing recipe by ID.'
+		#swagger.parameters['id'] = {
+			in: 'path',
+			required: true,
+			type: 'string',
+			description: 'Recipe ID'
+		}
+		#swagger.parameters['recipe'] = {
+			in: 'body',
+			required: true,
+			description: 'Updated recipe data (partial or full)',
+			schema: {
+				title: 'Updated Hummus Title',
+				description: 'Optional updated description',
+				ingredients: [
+					{ text: '8 oz store-bought hummus' }
+				],
+				steps: [
+					'Mix all ingredients together.'
+				],
+				tags: ['dip', 'updated'],
+				isPublic: true
+			}
+		}
 	*/
 	return recipes.updateRecipe(req, res);
 });

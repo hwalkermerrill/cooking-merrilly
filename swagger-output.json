@@ -55,7 +55,80 @@
             "description": "Recipe data",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Hummus"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Quick homemade hummus with optional sweet or spicy additions."
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "example": "Dates"
+                      },
+                      "optional": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "example": [
+                    "Mix all ingredients together.",
+                    "Adjust measurements to taste."
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "dip",
+                    "mediterranean",
+                    "sauce",
+                    "dairy-free",
+                    "vegan"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "prepTimeMinutes": {
+                  "type": "number",
+                  "example": 5
+                },
+                "cookTimeMinutes": {
+                  "type": "number",
+                  "example": 0
+                },
+                "yield": {
+                  "type": "string",
+                  "example": "Serves 4–6"
+                },
+                "pairings": {
+                  "type": "string",
+                  "example": "Serve with pita, veggies, or as a side to gyros."
+                },
+                "variations": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "isPublic": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
             }
           }
         ],
@@ -131,7 +204,62 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
+          },
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "Updated recipe data (partial or full)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Updated Hummus Title"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Optional updated description"
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "example": "8 oz store-bought hummus"
+                      }
+                    }
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "example": [
+                    "Mix all ingredients together."
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "dip",
+                    "updated"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "isPublic": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -263,6 +391,62 @@
         ],
         "summary": "Create a new meal",
         "description": "Creates a new meal.",
+        "parameters": [
+          {
+            "name": "meal",
+            "in": "body",
+            "required": true,
+            "description": "Meal data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Test Fettuccine Alfredo Computer Chips"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Test - Fettuccine pasta finished in Alfredo sauce and topped with sliced strip steak."
+                },
+                "recipeIds": {
+                  "type": "array",
+                  "example": [
+                    "60f7c2b5e1a4c12a34abcd12",
+                    "60f7c2b5e1a4c12a34abcd34"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "assemblySteps": {
+                  "type": "array",
+                  "example": [
+                    "Prepare Fettuccine Pasta according to its recipe.",
+                    "Prepare Alfredo Sauce according to its recipe.",
+                    "Prepare Strip Steak for Alfredo and slice.",
+                    "Combine with computer chips and serve."
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "test",
+                    "pasta",
+                    "alfredo",
+                    "cpu",
+                    "italian"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -317,7 +501,55 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Meal ID"
+          },
+          {
+            "name": "meal",
+            "in": "body",
+            "required": true,
+            "description": "Updated meal data (partial or full)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Updated Meal Title"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Optional updated description"
+                },
+                "tags": {
+                  "type": "array",
+                  "example": [
+                    "meal",
+                    "updated"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "assemblySteps": {
+                  "type": "array",
+                  "example": [
+                    "Updated assembly step"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "recipeIds": {
+                  "type": "array",
+                  "example": [
+                    "60f7c2b5e1a4c12a34abcd12"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
