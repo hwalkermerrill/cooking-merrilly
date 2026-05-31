@@ -1,3 +1,7 @@
+/* 
+	#swagger.basePath = '/recipes'
+*/
+
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
@@ -24,7 +28,7 @@ router.get("/hidden", (req, res) => {
 });
 
 // GET recipe by ID
-router.get("/id/:id", (req, res) => {
+router.get("/:id", (req, res) => {
 	/* 
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Get recipe by ID'

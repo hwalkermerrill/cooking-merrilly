@@ -25,13 +25,13 @@
         }
       }
     },
-    "/recipes": {
+    "/recipes/": {
       "get": {
         "tags": [
           "Recipes"
         ],
         "summary": "Get all recipes",
-        "description": "Returns a list of all recipes in the database.",
+        "description": "Returns all public recipes.",
         "responses": {
           "200": {
             "description": "OK"
@@ -48,53 +48,54 @@
         "summary": "Create a new recipe",
         "description": "Creates a new recipe.",
         "parameters": [
-					{
-						"name": "recipe",
-						"in": "body",
-						"required": true,
-						"description": "Recipe data",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"title": { "type": "string", "example": "Example Recipe" },
-								"description": { "type": "string" },
-								"ingredients": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"text": { "type": "string" },
-											"optional": { "type": "boolean" },
-											"secret": { "type": "boolean" }
-										}
-									}
-								},
-								"steps": {
-									"type": "array",
-									"items": { "type": "string" }
-								},
-								"tags": {
-									"type": "array",
-									"items": { "type": "string" }
-								}
-							},
-							"required": ["title"]
-						}
-					}
-				],
-				"responses": {
-					"201": { "description": "Created" },
-					"400": { "description": "Bad Request" }
-				}
-			}
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "Recipe data",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/hidden": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get hidden recipes",
+        "description": "Returns recipes where isPublic is false.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
     "/recipes/{id}": {
       "get": {
         "tags": [
           "Recipes"
         ],
-        "summary": "Get a recipe by ID",
-        "description": "Returns a single recipe based on its MongoDB ObjectId.",
+        "summary": "Get recipe by ID",
+        "description": "Returns a recipe by its MongoDB ObjectId.",
         "parameters": [
           {
             "name": "id",
@@ -113,6 +114,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -121,67 +125,13 @@
           "Recipes"
         ],
         "summary": "Update a recipe",
-        "description": "Updates an existing recipe by id.",
-        "parameters": [
-          {
-						"name": "id",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "Recipe ID"
-					},
-					{
-						"name": "recipe",
-						"in": "body",
-						"required": true,
-						"description": "Updated recipe data",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"title": { "type": "string", "example": "Updated Recipe Title" },
-								"description": { "type": "string" },
-								"ingredients": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"text": { "type": "string" },
-											"optional": { "type": "boolean" },
-											"secret": { "type": "boolean" }
-										}
-									}
-								},
-								"steps": {
-									"type": "array",
-									"items": { "type": "string" }
-								},
-								"tags": {
-									"type": "array",
-									"items": { "type": "string" }
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": { "description": "OK" },
-					"400": { "description": "Bad Request" },
-					"404": { "description": "Not Found" }
-				}
-      },
-      "delete": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "Delete a recipe",
-        "description": "Deletes a recipe by its ID.",
+        "description": "Updates an existing recipe by ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Recipe ID"
+            "type": "string"
           }
         ],
         "responses": {
@@ -193,6 +143,286 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Delete a recipe",
+        "description": "Deletes a recipe by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/tag/{tag}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Get recipes by tag",
+        "description": "Returns recipes that contain the specified tag.",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/name/{name}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Search recipes by name",
+        "description": "Returns recipes whose title matches the search term.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/meals/": {
+      "get": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Get all meals",
+        "description": "Returns all meals.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Create a new meal",
+        "description": "Creates a new meal.",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/meals/{id}": {
+      "get": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Get meal by ID",
+        "description": "Returns a meal by its MongoDB ObjectId.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Update a meal",
+        "description": "Updates an existing meal by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Delete a meal",
+        "description": "Deletes a meal by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/meals/tag/{tag}": {
+      "get": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Get meals by tag",
+        "description": "Returns meals that contain the specified tag.",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/meals/name/{name}": {
+      "get": {
+        "tags": [
+          "Meals"
+        ],
+        "summary": "Search meals by name",
+        "description": "Returns meals whose title matches the search term.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

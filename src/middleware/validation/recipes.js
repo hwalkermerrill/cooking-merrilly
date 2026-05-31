@@ -13,10 +13,9 @@ function validateRecipeBody(body) {
 	}
 
 	const hasIngredients = Array.isArray(body.ingredients) && body.ingredients.length > 0;
-	const hasSections = Array.isArray(body.sections) && body.sections.length > 0;
 
-	if (!hasIngredients && !hasSections) {
-		return "Recipe must have either ingredients or sections.";
+	if (!hasIngredients) {
+		return "Recipe must have at least one ingredient.";
 	}
 
 	// Optional: basic type checks

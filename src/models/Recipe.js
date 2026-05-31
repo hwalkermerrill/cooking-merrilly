@@ -15,13 +15,6 @@ const variationSchema = new mongoose.Schema({
 	steps: { type: [String], default: [] }
 }, { _id: false });
 
-// Section structure for nested recipes
-const sectionSchema = new mongoose.Schema({
-	title: { type: String, required: true },
-	ingredients: { type: [ingredientSchema], default: [] },
-	steps: { type: [String], default: [] }
-}, { _id: false });
-
 // Main Recipe schema
 const recipeSchema = new mongoose.Schema({
 	title: {
@@ -42,12 +35,6 @@ const recipeSchema = new mongoose.Schema({
 
 	steps: {
 		type: [String],
-		default: []
-	},
-
-	// Complex recipes use sections instead:
-	sections: {
-		type: [sectionSchema],
 		default: []
 	},
 

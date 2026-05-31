@@ -1,3 +1,7 @@
+/* 
+	#swagger.basePath = '/'
+*/
+
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
