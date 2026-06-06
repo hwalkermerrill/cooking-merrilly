@@ -55,11 +55,14 @@ app.use(devLogs);
 
 // Swagger Docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
-	oauth: {
-		clientId: process.env.GOOGLE_CLIENT_ID,
-		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		appName: "Cooking Merrill(y) API",
-		usePkceWithAuthorizationCodeGrant: true
+	swaggerOptions: {
+		oauth2RedirectUrl: "https://cooking-merrilly.onrender.com/api-docs/oauth2-redirect.html",
+		oauth: {
+			clientId: process.env.GOOGLE_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			appName: "Cooking Merrill(y) API",
+			usePkceWithAuthorizationCodeGrant: true
+		}
 	}
 }));
 
@@ -70,6 +73,5 @@ app.use("/", require("./src/routes"));
 mongoose.connection.once("open", () => {
 	app.listen(PORT, () => {
 		console.log(`Server is running on http://127.0.0.1:${PORT}`);
-		console.log(`GOOGLE_CLIENT_ID: ${process.env.GOOGLE_CLIENT_ID}`);
 	});
 });
