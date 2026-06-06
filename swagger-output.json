@@ -10,6 +10,27 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "googleOAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "tokenUrl": "https://oauth2.googleapis.com/token",
+      "scopes": {
+        "profile": "Access your basic profile info",
+        "email": "Access your email address"
+      }
+    },
+    "githubOAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "tokenUrl": "https://github.com/login/oauth/access_token",
+      "scopes": {
+        "user": "Read your GitHub profile"
+      }
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -657,6 +678,298 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "Returns all users in the system.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user by ID",
+        "description": "Returns a user by their MongoDB ObjectId.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/me/info": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get current user",
+        "description": "Returns the currently authenticated user.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      }
+    },
+    "/users/me": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update current user",
+        "description": "Updates the authenticated user’s profile information.",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "User description",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "displayName": {
+                  "type": "string",
+                  "example": "Display Name"
+                },
+                "avatar": {
+                  "type": "string",
+                  "example": "https://example.com/avatar.png"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      }
+    },
+    "/users/me/favorites/{recipeId}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add favorite recipe",
+        "description": "Adds a recipe to the user’s favorites list.",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remove favorite recipe",
+        "description": "Removes a recipe from the user’s favorites list.",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      }
+    },
+    "/users/me/favorites/details": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get detailed favorites",
+        "description": "Returns full details for each favorite recipe or meal.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logout current user",
+        "description": "Logs out the currently authenticated user and destroys their session.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/success": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/failure": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

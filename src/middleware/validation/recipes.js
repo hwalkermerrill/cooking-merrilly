@@ -8,26 +8,26 @@ function isValidObjectId(id) {
 
 // Validate recipe input data
 function validateRecipeBody(body) {
+	const errors = [];
+
 	if (!body.title || typeof body.title !== "string" || !body.title.trim()) {
-		return "Title is required and must be a non-empty string.";
+		errors.push("Title is required and must be a non-empty string.");
 	}
 
 	const hasIngredients = Array.isArray(body.ingredients) && body.ingredients.length > 0;
-
 	if (!hasIngredients) {
-		return "Recipe must have at least one ingredient.";
+		errors.push("Recipe must have at least one ingredient.");
 	}
 
-	// Optional: basic type checks
 	if (body.prepTimeMinutes != null && typeof body.prepTimeMinutes !== "number") {
-		return "prepTimeMinutes must be a number if provided.";
+		errors.push("prepTimeMinutes must be a number if provided.");
 	}
 
 	if (body.cookTimeMinutes != null && typeof body.cookTimeMinutes !== "number") {
-		return "cookTimeMinutes must be a number if provided.";
+		errors.push("cookTimeMinutes must be a number if provided.");
 	}
 
-	return null;
+	return errors.length > 0 ? errors.join(" ") : null;
 }
 
 module.exports = { isValidObjectId, validateRecipeBody };

@@ -1,10 +1,13 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const dotenv = require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
 const path = require("path");
 const mongoose = require("./src/models/connection");
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger-output.json");
+require("./src/middleware/passport");
 
 // Constants
 const app = express();
@@ -15,6 +18,15 @@ const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "production";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Dev Logging
 const devLogs = (req, res, next) => {
@@ -42,7 +54,13 @@ const devLogs = (req, res, next) => {
 app.use(devLogs);
 
 // Swagger Docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
+	oauth: {
+		clientId: process.env.GOOGLE_CLIENT_ID,
+		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		usePkceWithAuthorizationCodeGrant: true
+	}
+}));
 
 // Routes
 app.use("/", require("./src/routes"));

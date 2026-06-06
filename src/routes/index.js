@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
 // Sub-Routers
 router.use("/recipes", require("./recipes"));
 router.use("/meals", require("./meals"));
-// router.use("/users", require("./users"));
+router.use("/users", require("./users"));
+router.use("/auth", require("./auth"));
 
 module.exports = router;

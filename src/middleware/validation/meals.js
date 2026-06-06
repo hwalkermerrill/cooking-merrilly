@@ -8,20 +8,22 @@ function isValidObjectId(id) {
 
 // Validate meal input data
 function validateMealBody(body) {
+	const errors = [];
+
 	if (!body.title || typeof body.title !== "string" || !body.title.trim()) {
-		return "Title is required and must be a non-empty string.";
+		errors.push("Title is required and must be a non-empty string.");
 	}
 
 	if (!Array.isArray(body.recipeIds) || body.recipeIds.length === 0) {
-		return "Meal must include at least one recipeId.";
+		errors.push("Meal must include at least one recipeId.");
+	} else {
+		const invalidId = body.recipeIds.find(id => !isValidObjectId(id));
+		if (invalidId) {
+			errors.push(`Invalid recipeId: ${invalidId}`);
+		}
 	}
 
-	const invalidId = body.recipeIds.find(id => !isValidObjectId(id));
-	if (invalidId) {
-		return `Invalid recipeId: ${invalidId}`;
-	}
-
-	return null;
+	return errors.length > 0 ? errors.join(" ") : null;
 }
 
 module.exports = { isValidObjectId, validateMealBody };
