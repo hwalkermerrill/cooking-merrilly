@@ -66,6 +66,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
 	}
 }));
 
+// Trust proxy to stay in https on Render
+app.set("trust proxy", true);
+
 // Routes
 app.use("/", require("./src/routes"));
 
