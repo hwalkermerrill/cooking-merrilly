@@ -16,9 +16,6 @@ This site is intended to expand to include organized family recipes, loved exter
 
 ## Structure
 
-Each topic is sorted by unit, with files required for the main functioning of the
-site living in the root folder, and demonstrations held inside the demo folder.
-
 ```text
 cooking-merrilly
 ├── public/
