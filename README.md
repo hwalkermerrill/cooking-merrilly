@@ -24,14 +24,37 @@ cooking-merrilly
 ├── public/
 ├── src/
 │   ├── controllers/
-│   │   └── routes.js
+│   │   ├── meals.js
+│   │   ├── recipes.js
+│   │   └── users.js
 │   ├── middleware/
+│   │   ├── DataBase/
+│   │   │   ├── meals.js
+│   │   │   ├── recipes.js
+│   │   │   └── users.js
+│   │   ├── auth.js
+│   │   └── passport.js
 │   ├── models/
-│   │   └── connection.js
+│   │   ├── DataBase/
+│   │   │   ├── runSeedFiles.js
+│   │   │   ├── seedMeals.js
+│   │   │   └── seedRecipes.js
+│   │   ├── connection.js
+│   │   ├── Meal.js
+│   │   ├── Recipe.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── index.js
+│   │   ├── meals.js
+│   │   ├── recipes.js
+│   │   └── users.js
 │   ├── utils/
+│   │   └── index.ts
 │   └── views/
+├── server.js
 ├── swagger-output.json
-└── server.js
+└── swagger.js
 ```
 
 ## Features to be Implemented (Checklist)
