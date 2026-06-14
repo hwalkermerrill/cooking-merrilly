@@ -5,7 +5,7 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
-const { requireAuth } = require("../middleware/auth");
+const { requireAuth, requireAdmin } = require("../middleware/auth");
 const recipes = require("../controllers/recipes");
 
 // GET all recipes
@@ -19,11 +19,12 @@ router.get("/", (req, res) => {
 });
 
 // GET hidden recipes
-router.get("/hidden", (req, res) => {
+router.get("/hidden", requireAdmin, (req, res) => {
 	/* 
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Get hidden recipes'
-		#swagger.description = 'Returns recipes where isPublic is false.'
+		#swagger.security = [{ "googleOAuth": [] }]
+		#swagger.description = 'Returns recipes where isPublic is false. Admin access required.'
 	*/
 	return recipes.getHiddenRecipes(req, res);
 });

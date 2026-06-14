@@ -10,11 +10,11 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
-const { requireAuth } = require("../middleware/auth");
+const { requireAuth, requireAdmin } = require("../middleware/auth");
 const users = require("../controllers/users");
 
 // GET all users
-router.get("/", requireAuth, (req, res) => {
+router.get("/", requireAdmin, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get all users'
@@ -22,13 +22,13 @@ router.get("/", requireAuth, (req, res) => {
 			"googleOAuth": [],
 			"githubOAuth": []
 		}]
-		#swagger.description = 'Returns all users in the system.'
+		#swagger.description = 'Returns all users in the system. Admin access required.'
 	*/
 	return users.getAllUsers(req, res);
 });
 
 // GET user by ID
-router.get("/:id", requireAuth, (req, res) => {
+router.get("/:id", requireAdmin, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get user by ID'
@@ -36,7 +36,7 @@ router.get("/:id", requireAuth, (req, res) => {
 			"googleOAuth": [],
 			"githubOAuth": []
 		}]
-		#swagger.description = 'Returns a user by their MongoDB ObjectId.'
+		#swagger.description = 'Returns a user by their MongoDB ObjectId. Admin access required.'
 	*/
 	return users.getUserById(req, res);
 });
@@ -76,6 +76,34 @@ router.put("/me", requireAuth, (req, res) => {
 		}
 	*/
 	return users.updateCurrentUser(req, res);
+});
+
+// UPDATE user role (admin only)
+router.put("/:id/role", requireAdmin, (req, res) => {
+	/* 
+			#swagger.tags = ['Users']
+			#swagger.summary = 'Update a user’s role (admin only)'
+			#swagger.description = 'Allows an admin to change a user’s role to user or admin.'
+			#swagger.security = [{
+					"googleOAuth": [],
+					"githubOAuth": []
+			}]
+			#swagger.parameters['id'] = {
+					in: 'path',
+					required: true,
+					type: 'string',
+					description: 'User ID'
+			}
+			#swagger.parameters['role'] = {
+					in: 'body',
+					required: true,
+					description: 'New role for the user',
+					schema: {
+							role: "admin"
+					}
+			}
+	*/
+	return users.updateUserRole(req, res);
 });
 
 // ADD favorite recipe
