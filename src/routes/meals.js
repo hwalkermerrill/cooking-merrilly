@@ -5,6 +5,7 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
+const { requireAuth } = require("../middleware/auth");
 const meals = require("../controllers/meals");
 
 // GET all meals
@@ -48,10 +49,11 @@ router.get("/name/:name", (req, res) => {
 });
 
 // POST create meal
-router.post("/", (req, res) => {
+router.post("/", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Meals']
 		#swagger.summary = 'Create a new meal'
+		#swagger.security = [{ "googleOAuth": [] }]
 		#swagger.description = 'Creates a new meal.'
 		#swagger.parameters['meal'] = {
 			in: 'body',
@@ -75,10 +77,11 @@ router.post("/", (req, res) => {
 });
 
 // PUT update meal
-router.put("/:id", (req, res) => {
+router.put("/:id", requireAuth, (req, res) => {
 	/* 
 			#swagger.tags = ['Meals']
 			#swagger.summary = 'Update a meal'
+			#swagger.security = [{ "googleOAuth": [] }]
 			#swagger.description = 'Updates an existing meal by ID.'
 			#swagger.parameters['id'] = {
 				in: 'path',
@@ -105,10 +108,11 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE meal
-router.delete("/:id", (req, res) => {
+router.delete("/:id", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Meals']
 		#swagger.summary = 'Delete a meal'
+		#swagger.security = [{ "googleOAuth": [] }]
 		#swagger.description = 'Deletes a meal by ID.'
 	*/
 	return meals.deleteMeal(req, res);

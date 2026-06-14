@@ -5,6 +5,7 @@
 // Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
+const { requireAuth } = require("../middleware/auth");
 const recipes = require("../controllers/recipes");
 
 // GET all recipes
@@ -64,50 +65,52 @@ router.get("/name/:name", (req, res) => {
 });
 
 // POST create recipe
-router.post("/", (req, res) => {
+router.post("/", requireAuth, (req, res) => {
 	/* 
-			#swagger.tags = ['Recipes']
-			#swagger.summary = 'Create a new recipe'
-			#swagger.description = 'Creates a new recipe.'
-			#swagger.parameters['recipe'] = {
-				in: 'body',
-				required: true,
-				description: 'Recipe data',
-				schema: {
-					title: 'Test Hummus and Computer Chips',
-					description: 'Quick homemade hummus with optional CPU upgrades.',
-					ingredients: [
-						{ text: '8 oz store-bought hummus' },
-						{ text: '1 tbsp olive oil' },
-						{ text: '1 tbsp garlic paste or powder' },
-						{ text: '1/2 tbsp lemon juice' },
-						{ text: '1/2 tbsp crushed red pepper' },
-						{ text: '1/2 tbsp honey', secret: true },
-						{ text: '1-2 oz feta cheese', optional: true },
-						{ text: 'CPU', optional: true }
-					],
-					steps: [
-						'Mix all ingredients together.',
-						'Add computer chips and adjust power accordingly.'
-					],
-					tags: ['test', 'cpu', 'dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
-					prepTimeMinutes: 5,
-					cookTimeMinutes: 0,
-					yield: 'Serves 4–6',
-					pairings: 'Serve with pita, veggies, or as a side to gyros.',
-					variations: [],
-					isPublic: true
-				}
+		#swagger.tags = ['Recipes']
+		#swagger.summary = 'Create a new recipe'
+		#swagger.security = [{ "googleOAuth": [] }]
+		#swagger.description = 'Creates a new recipe.'
+		#swagger.parameters['recipe'] = {
+			in: 'body',
+			required: true,
+			description: 'Recipe data',
+			schema: {
+				title: 'Test Hummus and Computer Chips',
+				description: 'Quick homemade hummus with optional CPU upgrades.',
+				ingredients: [
+					{ text: '8 oz store-bought hummus' },
+					{ text: '1 tbsp olive oil' },
+					{ text: '1 tbsp garlic paste or powder' },
+					{ text: '1/2 tbsp lemon juice' },
+					{ text: '1/2 tbsp crushed red pepper' },
+					{ text: '1/2 tbsp honey', secret: true },
+					{ text: '1-2 oz feta cheese', optional: true },
+					{ text: 'CPU', optional: true }
+				],
+				steps: [
+					'Mix all ingredients together.',
+					'Add computer chips and adjust power accordingly.'
+				],
+				tags: ['test', 'cpu', 'dip', 'mediterranean', 'sauce', 'dairy-free', 'vegan'],
+				prepTimeMinutes: 5,
+				cookTimeMinutes: 0,
+				yield: 'Serves 4–6',
+				pairings: 'Serve with pita, veggies, or as a side to gyros.',
+				variations: [],
+				isPublic: true
 			}
-		*/
+		}
+	*/
 	return recipes.createRecipe(req, res);
 });
 
 // PUT update recipe
-router.put("/:id", (req, res) => {
+router.put("/:id", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Update a recipe'
+		#swagger.security = [{ "googleOAuth": [] }]
 		#swagger.description = 'Updates an existing recipe by ID.'
 		#swagger.parameters['id'] = {
 			in: 'path',
@@ -137,10 +140,11 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE recipe
-router.delete("/:id", (req, res) => {
+router.delete("/:id", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Recipes']
 		#swagger.summary = 'Delete a recipe'
+		#swagger.security = [{ "googleOAuth": [] }]
 		#swagger.description = 'Deletes a recipe by ID.'
 	*/
 	return recipes.deleteRecipe(req, res);

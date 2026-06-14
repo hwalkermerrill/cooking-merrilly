@@ -2,34 +2,47 @@
 	#swagger.basePath = '/users'
 */
 
-// Required Imports
+/* 
+	NOTE: All user routes require OAuth session authentication.
+	Log in via /auth/google or /auth/github before calling these routes.
+*/
+
+// Required Imports (Core-Middleware-Routes-Models-Utils)
 const express = require("express");
 const router = express.Router();
+const { requireAuth } = require("../middleware/auth");
 const users = require("../controllers/users");
-const { ensureAuthenticated } = require("../middleware/auth");
 
 // GET all users
-router.get("/", (req, res) => {
+router.get("/", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get all users'
+		#swagger.security = [{
+			"googleOAuth": [],
+			"githubOAuth": []
+		}]
 		#swagger.description = 'Returns all users in the system.'
 	*/
 	return users.getAllUsers(req, res);
 });
 
 // GET user by ID
-router.get("/:id", (req, res) => {
+router.get("/:id", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get user by ID'
+		#swagger.security = [{
+			"googleOAuth": [],
+			"githubOAuth": []
+		}]
 		#swagger.description = 'Returns a user by their MongoDB ObjectId.'
 	*/
 	return users.getUserById(req, res);
 });
 
 // GET current authenticated user
-router.get("/me/info", (req, res) => {
+router.get("/me/info", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get current user'
@@ -43,7 +56,7 @@ router.get("/me/info", (req, res) => {
 });
 
 // UPDATE current user
-router.put("/me", (req, res) => {
+router.put("/me", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Update current user'
@@ -66,7 +79,7 @@ router.put("/me", (req, res) => {
 });
 
 // ADD favorite recipe
-router.post("/me/favorites/:recipeId", (req, res) => {
+router.post("/me/favorites/:recipeId", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Add favorite recipe'
@@ -86,7 +99,7 @@ router.post("/me/favorites/:recipeId", (req, res) => {
 });
 
 // REMOVE favorite recipe
-router.delete("/me/favorites/:recipeId", (req, res) => {
+router.delete("/me/favorites/:recipeId", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Remove favorite recipe'
@@ -105,7 +118,7 @@ router.delete("/me/favorites/:recipeId", (req, res) => {
 	return users.removeFavorite(req, res);
 });
 
-router.get("/me/favorites/details", ensureAuthenticated, (req, res) => {
+router.get("/me/favorites/details", requireAuth, (req, res) => {
 	/* 
 		#swagger.tags = ['Users']
 		#swagger.summary = 'Get detailed favorites'

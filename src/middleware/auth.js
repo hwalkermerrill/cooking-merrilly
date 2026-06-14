@@ -8,4 +8,11 @@ function ensureAuthenticated(req, res, next) {
 	});
 }
 
-module.exports = { ensureAuthenticated };
+function requireAuth(req, res, next) {
+	if (!req.user) {
+		return res.status(401).json({ error: "Unauthorized. Please log in with OAuth." });
+	}
+	next();
+}
+
+module.exports = { requireAuth, ensureAuthenticated };
