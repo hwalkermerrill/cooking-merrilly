@@ -162,10 +162,18 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       }
     },
     "/recipes/hidden": {
@@ -292,13 +300,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -321,13 +337,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       }
     },
     "/recipes/tag/{tag}": {
@@ -477,10 +501,18 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       }
     },
     "/meals/{id}": {
@@ -582,13 +614,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -611,13 +651,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": []
+          }
+        ]
       }
     },
     "/meals/tag/{tag}": {
@@ -693,10 +741,19 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
       }
     },
     "/users/{id}": {
@@ -721,13 +778,22 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [],
+            "githubOAuth": []
+          }
+        ]
       }
     },
     "/users/me/info": {
